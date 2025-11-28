@@ -125,7 +125,7 @@ let emplacementCitation = document.querySelector('#citation');
 let auteur = document.querySelector('#auteur');
 let btn = document.querySelector('#nouveau');
 let dernier = 0;
-let nombreAleatoire;
+let nombreAleatoire = 0;
 let nombreElementsCitations = citations.length;
 
 function genererNombreEntier(max) {
@@ -134,9 +134,13 @@ function genererNombreEntier(max) {
 
 
 function majContenu () {
-  nombreAleatoire = genererNombreEntier(nombreElementsCitations);
+  do {
+    nombreAleatoire = genererNombreEntier(nombreElementsCitations);
+  } while (nombreAleatoire == dernier);
+
   emplacementCitation.textContent = citations[nombreAleatoire][0];
   auteur.textContent = citations[nombreAleatoire][1];
-}
+  dernier = nombreAleatoire;
+};
 
 btn.addEventListener('click', majContenu);
